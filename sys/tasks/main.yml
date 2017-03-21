@@ -1,0 +1,28 @@
+---
+- name: Install NewRelic APT source
+  copy:
+    src: newrelic.list
+    dest: /etc/apt/sources.list.d/newrelic.list
+
+- name: Install NewRelic APT key
+  apt_key:
+    url: https://download.newrelic.com/548C16BF.gpg
+    state: present
+
+- name: Install newrelic-sysmond
+  apt:
+    name: newrelic-sysmond
+    update_cache: yes
+
+- name: Deploy the nrsysmond.cfg file
+  template:
+    src: nrsysmond.cfg
+    dest: /etc/newrelic/nrsysmond.cfg
+    owner: newrelic
+    group: newrelic
+    mode: 0600
+
+- name: Restart newrelic-sysmond
+  service:
+    name: newrelic-sysmond
+    state: restarted

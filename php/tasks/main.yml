@@ -1,0 +1,20 @@
+- name: Install NewRelic PHP5
+  apt:
+    name: newrelic-php5
+    update_cache: yes
+  notify: restart apache
+
+- name: Install NewRelic config
+  template:
+    src: nrsysmond.cfg
+    dest: /etc/newrelic/nrsysmond.cfg
+    owner: newrelic
+    group: newrelic
+    mode: 0600
+  notify: restart newrelic-sysmond
+
+- name: ensure newrelic is running
+  service:
+    name: newrelic-sysmond
+    state: started
+    enabled: yes

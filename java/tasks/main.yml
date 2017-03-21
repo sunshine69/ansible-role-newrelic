@@ -1,0 +1,64 @@
+---
+
+- name: Download the Agent and Unzip the installer file
+  unarchive:
+    src: https://s3-ap-southeast-2.amazonaws.com/xvt-newrelic-agents/java8/newrelic-java-3.33.0.zip
+    dest: /opt
+    owner: root
+    group: root
+    creates: /opt/newrelic/newrelic.jar
+    copy: no
+
+- name: Setup JAVA_OPTS
+  copy:
+    src: "newrelic_java.sh"
+    dest: "/etc/profile.d/newrelic_java.sh"
+    mode: 0644
+
+- name: Setup Agent
+  template:
+    src: "{{ item }}"
+    dest: "/opt/newrelic/newrelic.yml"
+    mode: 0644
+  with_first_found:
+    - files:
+        - "{{ role_type }}_newrelic.yml"
+        - "default_newrelic.yml"
+      paths:
+        - "{{role_path}}/templates"
+
+- name: Create the new relic group
+  group:
+    name: "{{ newrelic.java_agent_group }}"
+    state: present
+
+- name: Create the newrelic user
+  user:
+    name: "{{ newrelic.java_agent_user }}"
+    comment: "{{ newrelic.java_agent_user }}"
+    uid: 1050
+    group: "{{ newrelic.java_agent_group }}"
+    state: present
+
+- name: Setup Log directory
+  file:
+    path: "{{ newrelic_log_dir }}"
+    state: directory
+    owner: "{{ newrelic.java_agent_user }}"
+    group: "{{ newrelic.java_agent_group }}"
+    mode: 0755
+
+- name: Install NewRelic config
+  template:
+    src: nrsysmond.cfg
+    dest: /etc/newrelic/nrsysmond.cfg
+    owner: newrelic
+    group: newrelic
+    mode: 0600
+  notify: restart newrelic-sysmond
+
+- name: ensure newrelic is running
+  service:
+    name: newrelic-sysmond
+    state: started
+    enabled: yes

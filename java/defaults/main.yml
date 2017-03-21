@@ -1,0 +1,4 @@
+newrelic_log_dir: /var/log/newrelic
+newrelic_java_log_dir: "{{ newrelic_log_dir }}"
+newrelic_java_log_file_name: newrelic_java_agent.log
+newrelic_nr_log_file_name: "{{ newrelic_log_dir }}/nrsysmond.log"
