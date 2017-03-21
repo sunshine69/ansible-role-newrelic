@@ -13,16 +13,3 @@
   apt:
     name: newrelic-sysmond
     update_cache: yes
-
-- name: Deploy the nrsysmond.cfg file
-  template:
-    src: nrsysmond.cfg
-    dest: /etc/newrelic/nrsysmond.cfg
-    owner: newrelic
-    group: newrelic
-    mode: 0600
-
-- name: Restart newrelic-sysmond
-  service:
-    name: newrelic-sysmond
-    state: restarted
