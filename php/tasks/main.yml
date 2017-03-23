@@ -16,7 +16,7 @@
 - name: Install NewRelic PHP Agent config
   template:
     src: newrelic.ini
-    dest: /etc/php/7.0/mods-available/newrelic.ini
+    dest: /etc/php/7.1/mods-available/newrelic.ini
     owner: root
     group: root
     mode: 0640
