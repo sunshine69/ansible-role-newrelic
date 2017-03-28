@@ -9,6 +9,11 @@
     creates: /opt/newrelic/newrelic.jar
     copy: no
 
+- name: change permission for newrelic under opt
+  file:
+    path: /opt/newrelic
+    mode: 0755
+
 - name: Setup JAVA_OPTS
   copy:
     src: "newrelic_java.sh"
