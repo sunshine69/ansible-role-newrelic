@@ -1,0 +1,15 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "{{ newrelic_aws_account }}"
+      },
+      "Condition": {
+        "StringEquals": {"sts:ExternalId": "{{ newrelic_account_id }}"}
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}

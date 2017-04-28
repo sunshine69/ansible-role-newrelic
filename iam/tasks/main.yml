@@ -1,0 +1,9 @@
+- iam_role:
+    region: "{{ region }}"
+    profile: "{{ aws_account_name }}"
+    name: NewRelicInfrastructure-Integrations
+    state: present
+    managed_policies:
+      - ReadOnlyAccess
+    assume_role_policy_document: "{{ lookup('template', 'newrelic-infra-trust-policy.json') }}"
+
