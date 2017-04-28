@@ -4,12 +4,28 @@
     src: newrelic.list
     dest: /etc/apt/sources.list.d/newrelic.list
 
-- name: Install NewRelic APT key
+- name: Install NewRelic APT keys
   apt_key:
-    url: https://download.newrelic.com/548C16BF.gpg
+    url: "{{ item }}"
     state: present
+  with_items:
+    - https://download.newrelic.com/548C16BF.gpg
+    - https://download.newrelic.com/infrastructure_agent/gpg/newrelic-infra.gpg
 
-- name: Install newrelic-sysmond
+- name: Set up license key
+  template:
+    src: newrelic-infra.yml
+    dest: /etc/newrelic-infra.yml
+
+- name: Set up NewRelic Infra source
+  template:
+    src: newrelic-infra.list
+    dest: /etc/apt/sources.list.d/newrelic-infra.list
+
+- name: Install newrelic packages
   apt:
-    name: newrelic-sysmond
+    name: "{{ item }}"
     update_cache: yes
+  with_items:
+    - newrelic-sysmond
+    - newrelic-infra
