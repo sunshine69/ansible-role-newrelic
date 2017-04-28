@@ -1,1 +1,1 @@
-license_key: {{ newrelic.api_key }}
+license_key: {{ newrelic_license_key }}

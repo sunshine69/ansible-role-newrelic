@@ -34,23 +34,23 @@
 
 - name: Create the new relic group
   group:
-    name: "{{ newrelic.java_agent_group }}"
+    name: "{{ newrelic_java_agent_group }}"
     state: present
 
 - name: Create the newrelic user
   user:
-    name: "{{ newrelic.java_agent_user }}"
-    comment: "{{ newrelic.java_agent_user }}"
+    name: "{{ newrelic_java_agent_user }}"
+    comment: "{{ newrelic_java_agent_user }}"
     uid: 1050
-    group: "{{ newrelic.java_agent_group }}"
+    group: "{{ newrelic_java_agent_group }}"
     state: present
 
 - name: Setup Log directory
   file:
     path: "{{ newrelic_log_dir }}"
     state: directory
-    owner: "{{ newrelic.java_agent_user }}"
-    group: "{{ newrelic.java_agent_group }}"
+    owner: "{{ newrelic_java_agent_user }}"
+    group: "{{ newrelic_java_agent_group }}"
     mode: 0755
 
 - name: Install NewRelic config
