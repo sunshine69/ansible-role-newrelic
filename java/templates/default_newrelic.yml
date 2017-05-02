@@ -269,7 +269,7 @@ common: &default_settings
   labels:
     Environment: XVT-ENV-{{env}}
     DataCenter: {{ newrelic_datacenter}}
-    ApplicationName: {{newrelic.app_name }}
+    ApplicationName: {{newrelic_app_name }}
     Version: {{ newrelic_app_version|default('unknown') }}
 
     # An example label
