@@ -41,7 +41,7 @@
   user:
     name: "{{ newrelic_java_agent_user }}"
     comment: "{{ newrelic_java_agent_user }}"
-    uid: 1050
+    #uid: 1050
     group: "{{ newrelic_java_agent_group }}"
     state: present
 
@@ -57,8 +57,8 @@
   template:
     src: nrsysmond.cfg
     dest: /etc/newrelic/nrsysmond.cfg
-    owner: newrelic
-    group: newrelic
+    owner: "{{ newrelic_java_agent_user }}"
+    group: "{{ newrelic_java_agent_group }}"
     mode: 0600
   notify: restart newrelic-sysmond
 
