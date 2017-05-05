@@ -55,8 +55,8 @@
   template:
     src: nrsysmond.cfg
     dest: /etc/newrelic/nrsysmond.cfg
-    owner: "{{ newrelic_java_agent_user }}"
-    group: "{{ newrelic_java_agent_group }}"
+    owner: "newrelic"
+    group: "newrelic"
     mode: 0600
   notify: restart newrelic-sysmond
 
