@@ -29,3 +29,17 @@
   with_items:
     - newrelic-sysmond
     - newrelic-infra
+
+- name: Install NewRelic config
+  template:
+    src: nrsysmond.cfg
+    dest: /etc/newrelic/nrsysmond.cfg
+    owner: "newrelic"
+    group: "newrelic"
+    mode: 0600
+
+- name: ensure newrelic is running
+  service:
+    name: newrelic-sysmond
+    state: started
+    enabled: yes
