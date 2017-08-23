@@ -58,10 +58,9 @@
     owner: "newrelic"
     group: "newrelic"
     mode: 0600
-  notify: restart newrelic-sysmond
 
 - name: ensure newrelic is running
   service:
     name: newrelic-sysmond
-    state: started
+    state: restarted
     enabled: yes
