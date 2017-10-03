@@ -6,8 +6,8 @@
 
 - name: Install NewRelic config
   template:
-    src: nrsysmond.cfg
-    dest: /etc/newrelic/nrsysmond.cfg.j2
+    src: nrsysmond.cfg.j2
+    dest: /etc/newrelic/nrsysmond.cfg
     owner: newrelic
     group: newrelic
     mode: 0600
