@@ -715,7 +715,7 @@ newrelic.daemon.logfile = "/var/log/newrelic/newrelic-daemon.log"
 ;
 ;          E.g., "Server:One;Data Center:Primary"
 ;
-;newrelic.labels = ""
+newrelic.labels = "{{ newrelic_labels|join(';') }}"
 
 ; Setting: newrelic.synthetics.enabled
 ; Type   : boolean

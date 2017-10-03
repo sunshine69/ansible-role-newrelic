@@ -7,7 +7,7 @@
 - name: Install NewRelic config
   template:
     src: nrsysmond.cfg
-    dest: /etc/newrelic/nrsysmond.cfg
+    dest: /etc/newrelic/nrsysmond.cfg.j2
     owner: newrelic
     group: newrelic
     mode: 0600
@@ -15,7 +15,7 @@
 
 - name: Install NewRelic PHP Agent config
   template:
-    src: newrelic.ini
+    src: newrelic.ini.j2
     dest: /etc/php/7.1/mods-available/newrelic.ini
     owner: root
     group: root
