@@ -50,17 +50,3 @@
     owner: "{{ newrelic_java_agent_user }}"
     group: "{{ newrelic_java_agent_group }}"
     mode: 0755
-
-- name: Install NewRelic config
-  template:
-    src: nrsysmond.cfg
-    dest: /etc/newrelic/nrsysmond.cfg
-    owner: "newrelic"
-    group: "newrelic"
-    mode: 0600
-
-- name: ensure newrelic is running
-  service:
-    name: newrelic-sysmond
-    state: restarted
-    enabled: yes

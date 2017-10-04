@@ -1,3 +1,4 @@
 labels: ""
 newrelic_log_dir: /var/log/newrelic
-newrelic_nr_log_file_name: "/var/log/newrelic/nrsysmond.log"
+newrelic_custom_attributes:
+  custom_attributes: "{{ newrelic_labels|default({}) }}"

@@ -4,15 +4,6 @@
     update_cache: yes
   notify: restart apache
 
-- name: Install NewRelic config
-  template:
-    src: nrsysmond.cfg.j2
-    dest: /etc/newrelic/nrsysmond.cfg
-    owner: newrelic
-    group: newrelic
-    mode: 0600
-  notify: restart newrelic-sysmond
-
 - name: Install NewRelic PHP Agent config
   template:
     src: newrelic.ini.j2
@@ -20,9 +11,3 @@
     owner: root
     group: root
     mode: 0640
-
-- name: ensure newrelic is running
-  service:
-    name: newrelic-sysmond
-    state: started
-    enabled: yes
