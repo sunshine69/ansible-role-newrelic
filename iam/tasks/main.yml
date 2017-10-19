@@ -1,6 +1,6 @@
 - iam_role:
     region: "{{ region }}"
-    profile: "{{ aws_account_name }}"
+    profile: "{{ profile|default(omit) }}"
     name: NewRelicInfrastructure-Integrations
     state: present
     managed_policies:
