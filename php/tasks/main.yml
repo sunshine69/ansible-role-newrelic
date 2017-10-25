@@ -3,6 +3,11 @@
     src: newrelic.list
     dest: /etc/apt/sources.list.d/newrelic.list
 
+- name: Add apt-key for newrelic repo
+  apt_key:
+    url: https://download.newrelic.com/548C16BF.gpg
+    state: present
+
 - name: Install NewRelic PHP5
   apt:
     name: newrelic-php5
