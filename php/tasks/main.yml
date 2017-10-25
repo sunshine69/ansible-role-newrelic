@@ -1,3 +1,8 @@
+- name: Set up NewRelic Sys source
+  copy:
+    src: newrelic.list
+    dest: /etc/apt/sources.list.d/newrelic.list
+
 - name: Install NewRelic PHP5
   apt:
     name: newrelic-php5
