@@ -3,6 +3,9 @@
     url: "{{ xvt_public_repo_url }}/newrelic-infra.msi"
     dest: '{{ ansible_install_dir|default("c:\ansible_install") }}\newrelic-infra.msi'
 
+# win_msi does not work for me, run it and the client not installed. The
+# msiexec.exe is still running on the remote no error log found yet
+# However this works
 - name: msi install newrelic-infra.msi
   win_command: 'msiexec.exe /qn /i c:\ansible_install\newrelic-infra.msi'
   args:
