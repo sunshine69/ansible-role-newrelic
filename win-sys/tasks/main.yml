@@ -13,7 +13,7 @@
 
 - name: template config
   win_template:
-    src: '{{ inventory_dir }}/../files/newrelic-infra.yml'
+    src: "newrelic-infra.yml"
     dest: 'C:\Program Files\New Relic\newrelic-infra\newrelic-infra.yml'
 
 - name: start service
