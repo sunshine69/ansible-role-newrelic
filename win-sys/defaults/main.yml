@@ -1,0 +1,4 @@
+labels: ""
+newrelic_log_dir: /var/log/newrelic
+newrelic_custom_attributes: "{{ newrelic_labels|default({}) }}"
+xvt_public_repo_url: "https://s3-ap-southeast-2.amazonaws.com/xvt-public-repo/pub"
