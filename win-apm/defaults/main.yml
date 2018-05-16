@@ -1,0 +1,13 @@
+labels: ""
+newrelic_custom_attributes: "{{ newrelic_labels|default({}) }}"
+xvt_public_repo_url: "https://s3-ap-southeast-2.amazonaws.com/xvt-public-repo/pub"
+
+win_newrelic_apm:
+  - msi: "newrelic-infra.msi"
+    base_url: "{{ xvt_public_repo_url }}"
+    install_dir: 'C:\Program Files\New Relic\newrelic-infra'
+    create_file: "newrelic-infra.exe"
+    newrelic_license_key: "{{ newrelic_license_key }}"
+    newrelic_custom_attributes: "{{ newrelic_labels|default({}) }}"
+    config_file_name: "newrelic-infra.yml"
+    service_name: "newrelic-infra"
