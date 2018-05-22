@@ -1,0 +1,4 @@
+- include_tasks: install.yml
+  with_items: "{{ win_newrelic_apm }}"
+  loop_control:
+    loop_var: task_item

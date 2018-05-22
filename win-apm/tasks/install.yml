@@ -1,0 +1,28 @@
+- name: Copy file to remote
+  win_get_url:
+    url: "{{ task_item.base_url|default(xvt_public_repo_url) }}/{{ task_item.msi }}"
+    dest: '{{ ansible_install_dir|default("c:\ansible_install") }}\{{ task_item.msi }}'
+
+# win_msi does not work for me, run it and the client not installed. The
+# msiexec.exe is still running on the remote no error log found yet
+# However this works
+- name: msi install {{ task_item.msi }}
+  win_command: 'msiexec.exe /qn /i c:\ansible_install\{{ task_item.msi }}'
+  args:
+    creates: '{{ task_item.install_dir }}\{{ task_item.create_file }}'
+
+- name: template config
+  win_copy:
+    content: |
+      license_key: {{ task_item.newrelic_license_key|default(newrelic_license_key) }}
+      custom_attributes:
+      {% for attribute in task_item.newrelic_custom_attributes|default(newrelic_custom_attributes) %}
+        {{ attribute.split(':', 2)[0] }}: {{ attribute.split(':')[1] }}
+      {% endfor %}
+    dest: '{{ task_item.install_dir }}\{{ {{ task_item.config_file_name }}'
+
+- name: start service
+  win_service:
+    name: "{{ task_item.service_name }}"
+    state: started
+    start_mode: auto
