@@ -30,6 +30,7 @@ win_newrelic_apm:
     newrelic_custom_attributes: "{{ newrelic_labels|default({}) }}"
     config_file_name: "newrelic-infra.yml"
     service_name: "newrelic-infra"
+    config_file_content: <content of newrelic config file>
 
 ```
 
@@ -47,11 +48,12 @@ Fields descriptions:
 - `newrelic_license_key` - Optional - Default to `newrelic_license_key`
 - `newrelic_custom_attributes` - Optional - The atributes, label we add into nee=wrelic config.
 
-- `config_file_name` - Required
+- `config_file_name` - Optional - No default.
   The newrelic config file name. Run the installer to find out for each newrelic type.
 
 - `service_name` - Required - The window service name.
 
+- `config_file_content` - Optional - No default. The content of the new relic config file.
 
 Dependencies
 ------------
