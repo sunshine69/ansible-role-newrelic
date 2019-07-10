@@ -13,14 +13,9 @@
 
 - block:
     - name: template config for newrelic-infra
-      win_copy:
-        content: |
-          license_key: {{ task_item.newrelic_license_key|default(newrelic_license_key) }}
-          custom_attributes:
-          {% for attribute in task_item.newrelic_custom_attributes|default(newrelic_custom_attributes) %}
-            {{ attribute.split(':', 2)[0] }}: {{ attribute.split(':')[1] }}
-          {% endfor %}
-        dest: '{{ task_item.install_dir }}\{{ {{ task_item.config_file_name }}'
+      win_template:
+        src: "newrelic-infra.yml.j2"
+        dest: '{{ task_item.install_dir }}\{{ task_item.config_file_name }}'
       when: task_item.config_file_name|default()
 
     - name: start service
@@ -33,5 +28,5 @@
 - name: template config from field name 'newrelic_config'
   win_copy:
     content: "{{ task_item.config_file_content }}"
-    dest: '{{ task_item.install_dir }}\{{ {{ task_item.config_file_name }}'
+    dest: '{{ task_item.install_dir }}\{{ task_item.config_file_name }}'
   when: task_item.config_file_content|default() and task_item.config_file_name|default()

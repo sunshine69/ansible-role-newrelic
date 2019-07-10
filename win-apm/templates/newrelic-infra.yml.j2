@@ -1,0 +1,5 @@
+license_key: {{ task_item.newrelic_license_key|default(newrelic_license_key) }}
+custom_attributes:
+{% for attribute in task_item.newrelic_custom_attributes|default(newrelic_custom_attributes) %}
+  {{ attribute.split('\:', 2)[0] }}\: {{ attribute.split('\:')[1] }}
+{% endfor %}
