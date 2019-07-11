@@ -1,5 +1,5 @@
 license_key: {{ task_item.newrelic_license_key|default(newrelic_license_key) }}
+display_name: {{ newrelic_display_name|default(inventory_hostname) }}
+
 custom_attributes:
-{% for attribute in task_item.newrelic_custom_attributes|default(newrelic_custom_attributes) %}
-  {{ attribute.split('\:', 2)[0] }}\: {{ attribute.split('\:')[1] }}
-{% endfor %}
+    {{ task_item.newrelic_custom_attributes|default(newrelic_custom_attributes)|to_nice_yaml|indent(4, False) }}

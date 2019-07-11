@@ -14,7 +14,7 @@
 - block:
     - name: template config for newrelic-infra
       win_template:
-        src: "newrelic-infra.yml.j2"
+        src: "{{ task_item.config_file_name }}.j2"
         dest: '{{ task_item.install_dir }}\{{ task_item.config_file_name }}'
       when: task_item.config_file_name|default()
 
