@@ -8,6 +8,7 @@ win_newrelic_apm:
     install_dir: 'C:\Program Files\New Relic\newrelic-infra'
     create_file: "newrelic-infra.exe"
     newrelic_license_key: "{{ newrelic_license_key }}"
-    newrelic_custom_attributes: "{{ newrelic_labels|default({}) }}"
+    display_name: "{{ newrelic_display_name|default(inventory_hostname) }}"
+    newrelic_custom_attributes: "{{ newrelic_custom_attributes|default({}) }}"
     config_file_name: "newrelic-infra.yml"
     service_name: "newrelic-infra"
