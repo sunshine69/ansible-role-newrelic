@@ -5,4 +5,4 @@ display_name: {{ task_item.display_name }}
 {% endif %}
 
 custom_attributes:
-    {{ task_item.newrelic_custom_attributes|default(newrelic_custom_attributes)|to_nice_yaml|indent(4, False) }}
+    {{ task_item.newrelic_custom_attributes|default(newrelic_custom_attributes)|to_yaml }}

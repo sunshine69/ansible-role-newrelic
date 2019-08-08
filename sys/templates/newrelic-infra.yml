@@ -3,4 +3,4 @@ license_key: {{ newrelic_license_key }}
 display_name: {{ newrelic_display_name|default(inventory_hostname) }}
 
 custom_attributes:
-  {{ newrelic_custom_attributes|default(newrelic_custom_attributes)|to_nice_yaml|indent(4, False) }}
+  {{ newrelic_custom_attributes|to_yaml }}
