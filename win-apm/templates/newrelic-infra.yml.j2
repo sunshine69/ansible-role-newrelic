@@ -1,6 +1,8 @@
 license_key: {{ task_item.newrelic_license_key|default(newrelic_license_key) }}
 
-display_name: {{ newrelic_display_name|default(inventory_hostname) }}
+{% if task_item.display_name|default() %}
+display_name: {{ task_item.display_name }}
+{% endif %}
 
 custom_attributes:
     {{ task_item.newrelic_custom_attributes|default(newrelic_custom_attributes)|to_yaml }}
